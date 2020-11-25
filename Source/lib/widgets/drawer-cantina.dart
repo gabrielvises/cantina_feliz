@@ -24,7 +24,7 @@ class _DrawerCantinaState extends State<DrawerCantina> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Colors.white,
         child: Column(
           children: [
             Expanded(
@@ -35,7 +35,7 @@ class _DrawerCantinaState extends State<DrawerCantina> {
                     padding: EdgeInsets.only(
                         top: convertTamanho(40), left: convertTamanho(20)),
                     alignment: Alignment.bottomLeft,
-                    child: Icon(Icons.directions_bike),
+                    child: Icon(Icons.food_bank),
                     // Image.asset(
                     //   "assets/icons/${Configuracoes.tema}/logo_ravex.png",
                     //   height: convertTamanho(30),
@@ -55,31 +55,30 @@ class _DrawerCantinaState extends State<DrawerCantina> {
                     dense: true,
                     title: Align(
                       child: Text(
-                        'Mapa',
+                        'Pedido',
                         style: TextStyle(
                           fontSize: convertTamanho(18),
-                          color: widget.telaAtual == "Mapa"
+                          color: widget.telaAtual == "Pedido"
                               ? Color(0xFFE37B20)
                               : null,
-                          fontWeight: widget.telaAtual == "Mapa"
+                          fontWeight: widget.telaAtual == "Pedido"
                               ? FontWeight.bold
                               : FontWeight.normal,
                         ),
                       ),
                       alignment: Alignment(-1.2, 0),
                     ),
-                    leading: Image.asset(
-                      widget.telaAtual == "Mapa"
-                          ? "assets/icons/mapa_selecionado.png"
-                          : "assets/icons/${Configuracoes.tema}/mapa.png",
-                      height: convertTamanho(24),
-                      width: convertTamanho(24),
-                      // width: 30,
-                    ),
+                    leading: Icon(Icons.food_bank),
+                    // Image.asset(
+                    //   widget.telaAtual == "Mapa"
+                    //       ? "assets/icons/mapa_selecionado.png"
+                    //       : "assets/icons/${Configuracoes.tema}/mapa.png",
+                    //   height: convertTamanho(24),
+                    //   width: convertTamanho(24),
+                    //   // width: 30,
+                    // ),
                     onTap: () {
                       // abrir tela
-                      navigator.currentState
-                          .pushReplacementNamed('/tela-mapa-veiculo');
                     },
                   ),
                   // quando pressionado:
@@ -87,90 +86,58 @@ class _DrawerCantinaState extends State<DrawerCantina> {
                     dense: true,
                     title: Align(
                       child: Text(
-                        'Veículos',
+                        'Admin',
                         style: TextStyle(
                           fontSize: convertTamanho(18),
-                          color: widget.telaAtual == "Veiculos"
+                          color: widget.telaAtual == "Admin"
                               ? Color(0xFFE37B20)
                               : null,
-                          fontWeight: widget.telaAtual == "Veiculos"
+                          fontWeight: widget.telaAtual == "Admin"
                               ? FontWeight.bold
                               : FontWeight.normal,
                         ),
                       ),
                       alignment: Alignment(-1.2, 0),
                     ),
-                    leading: Image.asset(
-                      widget.telaAtual == "Veiculos"
-                          ? "assets/icons/veículos_selecionado.png"
-                          : "assets/icons/${Configuracoes.tema}/veiculos.png",
-                      width: convertTamanho(24),
-                      height: convertTamanho(24),
-                      // width: 30,
-                    ),
+                    leading: Icon(Icons.food_bank),
+                    // Image.asset(
+                    //   widget.telaAtual == "Veiculos"
+                    //       ? "assets/icons/veículos_selecionado.png"
+                    //       : "assets/icons/${Configuracoes.tema}/veiculos.png",
+                    //   width: convertTamanho(24),
+                    //   height: convertTamanho(24),
+                    //   // width: 30,
+                    // ),
                     onTap: () {
                       // abrir tela
-                      navigator.currentState
-                          .pushReplacementNamed('/tela-lista-veiculo');
-                    },
-                  ),
-                  ListTile(
-                    dense: true,
-                    title: Align(
-                      child: Text(
-                        'Perfil',
-                        style: TextStyle(
-                          fontSize: convertTamanho(18),
-                          color: widget.telaAtual == "Perfil"
-                              ? Color(0xFFE37B20)
-                              : null,
-                          fontWeight: widget.telaAtual == "Perfil"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                      ),
-                      alignment: Alignment(-1.2, 0),
-                    ),
-                    leading: Image.asset(
-                      widget.telaAtual == "Perfil"
-                          ? "assets/icons/perfil_selecionado.png"
-                          : "assets/icons/${Configuracoes.tema}/perfil.png",
-                      height: convertTamanho(24),
-                      width: convertTamanho(24),
-                      // width: 30,
-                    ),
-                    onTap: () {
-                      // abrir tela
-                      navigator.currentState
-                          .pushReplacementNamed('/tela-perfil');
                     },
                   ),
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(convertTamanho(20)),
-              child: GestureDetector(
-                onTap: () {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("Sending Message"),
-                  ));
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: convertTamanho(5),
-                      horizontal: convertTamanho(60)),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE37B20), width: 2.0),
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
-                  child: Text(
-                    "Risco",
-                    style: TextStyle(
-                        fontSize: convertTamanho(22), color: Color(0xFFE37B20)),
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.all(convertTamanho(20)),
+            //   child: GestureDetector(
+            //     onTap: () {
+            //       Scaffold.of(context).showSnackBar(SnackBar(
+            //         content: Text("Sending Message"),
+            //       ));
+            //     },
+            //     child: Container(
+            //       padding: EdgeInsets.symmetric(
+            //           vertical: convertTamanho(5),
+            //           horizontal: convertTamanho(60)),
+            //       decoration: BoxDecoration(
+            //           border: Border.all(color: Color(0xFFE37B20), width: 2.0),
+            //           borderRadius: BorderRadius.all(Radius.circular(15))),
+            //       child: Text(
+            //         "Risco",
+            //         style: TextStyle(
+            //             fontSize: convertTamanho(22), color: Color(0xFFE37B20)),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
