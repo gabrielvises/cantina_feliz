@@ -1,4 +1,4 @@
-import 'package:Source/routes/navigator.dart';
+import 'package:Source/services/navigate.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,11 +16,20 @@ class _SplashPageState extends State<SplashPage> {
           new Duration(
             milliseconds: 4800,
           ), () {
-        navigator.currentState.pushReplacementNamed('/inicio');
+        _redirecionarParaInicio();
       });
     } else {
-      navigator.currentState.pushReplacementNamed('/inicio');
+      _redirecionarParaInicio();
     }
+  }
+
+  _redirecionarParaInicio() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Navigate(),
+      ),
+    );
   }
 
   @override

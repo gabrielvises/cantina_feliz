@@ -1,18 +1,12 @@
-import 'package:Source/widgets/tab.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import 'app/app_module.dart';
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Cantina feliz',
-      home: TabDemo(),
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await GlobalConfiguration()
+  //     .loadFromAsset(kReleaseMode ? "app_settings" : "app_settings.debug");
+  runApp(AppModule());
 }

@@ -1,11 +1,11 @@
-import 'package:Source/ui/tela_inicio/tela_inicio_page.dart';
+import 'package:Source/ui/tela_pessoa/tela_pessoa_page.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
-class TelaInicioModule extends ModuleWidget {
+class TelaPessoaModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
-        // Bloc((i) => TelaInicioBloc()),
+        // Bloc((i) => TelaPessoaBloc()),
       ];
 
   @override
@@ -15,8 +15,7 @@ class TelaInicioModule extends ModuleWidget {
       ];
 
   @override
-  Widget get view => TelaInicioPage();
+  Widget get view => TelaPessoaPage();
 
-  static Inject get to => Inject<TelaInicioModule>.of();
+  static Inject get to => Inject<TelaPessoaModule>.of();
 }
- 

@@ -13,6 +13,9 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
 
   int _selectedTab = 0;
 
+  Color corFundo = Color(0xFFA41D24); //0xFFEFEFEF
+  Color corPagina = Color.fromRGBO(241, 245, 248, 1);
+
   @override
   void initState() {
     super.initState();
@@ -66,17 +69,22 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
 
   Widget obterAppBar() {
     return SafeArea(
-      child: Padding(
-          padding: EdgeInsets.only(top: 10),
-          child: Stack(children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // botaoMenu(),
-                titulo(),
-              ],
+      child: Container(
+        color: corFundo,
+        child: Padding(
+            padding: EdgeInsets.only(
+              top: 10,
+              bottom: 10,
             ),
-          ])),
+            child: Stack(children: <Widget>[
+              // botaoMenu(),
+              Row(
+                children: [
+                  titulo(),
+                ],
+              ),
+            ])),
+      ),
     );
   }
 
@@ -84,7 +92,12 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
     return Expanded(
       child: Container(
         height: convertTamanho(30),
-        child: Center(child: Text("Cantina Honesta")),
+        child: Center(
+            child: Text("Cantina Honesta",
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white))),
       ),
     );
   }
@@ -100,15 +113,57 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
         drawer: DrawerCantina(
           telaAtual: "Pedido",
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: corFundo,
         body: Column(
           children: [
             obterAppBar(),
+            obterProgresso(),
             Expanded(
-              child: tabComponent(),
+              child: etapaPessoa(),
             ),
           ],
         ));
+  }
+
+  obterProgresso() {
+    return Container(
+      padding: EdgeInsets.only(bottom: 10, left: 15, right: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+            onTap: () {
+              print("test");
+            },
+            child: Text("Identifique-se",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                )),
+          ),
+          GestureDetector(
+            onTap: () {
+              print("test");
+            },
+            child: Text("Produto",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                )),
+          ),
+          GestureDetector(
+            onTap: () {
+              print("test");
+            },
+            child: Text("Finalizar",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                )),
+          ),
+        ],
+      ),
+    );
   }
 
   tabComponent() {
@@ -155,38 +210,6 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
         ));
   }
 
-  stepper() {
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      child: Stepper(
-        type: stepperType,
-        steps: [
-          Step(
-            title: Text("Identifique-se"),
-            content: Text("This is our first example."),
-          ),
-          Step(
-            title: Text("Produto"),
-            content: Text("This is our third example."),
-          ),
-          Step(
-            title: Text("Finalizar"),
-            content: Text("This is our forth example."),
-          ),
-        ],
-        currentStep: _index,
-        onStepTapped: (index) {
-          setState(() {
-            _index = index;
-          });
-        },
-        controlsBuilder: (BuildContext context,
-                {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
-            Container(child: Text("teste123")),
-      ),
-    );
-  }
-
   etapaPessoa() {
     return Container(
       child: Container(
@@ -195,59 +218,64 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
         child: Container(
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: corPagina, //Color.fromRGBO(241, 245, 248, 1),
                 borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(10.0),
                     topRight: const Radius.circular(10.0))),
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                  child: Container(
-                    height: 50.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.white),
-                    child: TextField(
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                          hintText: "Qual é o seu nome?",
-                          border: InputBorder.none,
-                          contentPadding:
-                              EdgeInsets.only(left: 15.0, top: 15.0),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () {},
-                            iconSize: 30.0,
-                          )),
-                      onChanged: (val) {
-                        setState(() {
-                          // searchAddr = val;
-                        });
-                      },
-                      onSubmitted: (term) {
-                        // searchAndNavigate();
-                      },
-                    ),
-                  ),
-                ),
+                barraPesquisa(),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    padding: EdgeInsets.only(top: 0, left: 10, right: 10),
                     width: double.infinity,
                     child: GridView.count(
+                      padding: EdgeInsets.only(
+                        top: 15,
+                      ),
                       // Create a grid with 2 columns. If you change the scrollDirection to
                       // horizontal, this produces 2 rows.
                       crossAxisCount: 3,
                       // Generate 100 widgets that display their index in the List.
 
                       children: [
-                        itemListaPessoa(),
-                        itemListaPessoa(),
-                        itemListaPessoa(),
-                        itemListaPessoa(),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa("assets/imagens/No-foto.png", "Lucas"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Willian"),
+                        itemListaPessoa("assets/imagens/No-foto.png",
+                            "Marco aurelio lacerda"),
+                        itemListaPessoa("assets/imagens/No-foto.png", "Ana"),
+                        itemListaPessoa("assets/imagens/No-foto.png", "Robson"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Jurandir"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Garibalda"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Jeferson"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Maradona"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                        itemListaPessoa(
+                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
                       ],
                     ),
                   ),
@@ -258,11 +286,98 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
     );
   }
 
-  itemListaPessoa() {
+  barraPesquisa() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+      child: Material(
+        elevation: 2.0,
+        borderRadius: BorderRadius.circular(10.0),
+        child: Container(
+          height: 50.0,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+          child: TextField(
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+                hintText: "Qual é o seu nome?",
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 15.0, top: 15.0),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {},
+                  iconSize: 30.0,
+                )),
+            onChanged: (val) {
+              setState(() {
+                // searchAddr = val;
+              });
+            },
+            onSubmitted: (term) {
+              // searchAndNavigate();
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  String pessoaSelecionada = "";
+  itemListaPessoa(
+    String imagem,
+    String nome,
+  ) {
     return Container(
-        margin: EdgeInsets.all(5),
-        color: Colors.green,
-        child: Center(child: Text("Pessoa")));
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          border: pessoaSelecionada == nome
+              ? Border.all(
+                  color: corFundo,
+                  width: 2.5,
+                )
+              : Border.all(
+                  color: corPagina,
+                  width: 2.5,
+                ),
+          borderRadius: BorderRadius.circular(10)),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            if (pessoaSelecionada == nome) {
+              pessoaSelecionada = "";
+            } else {
+              pessoaSelecionada = nome;
+            }
+          });
+        },
+        child: Material(
+          elevation: 1,
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 5,
+              left: 5,
+              right: 5,
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                    flex: 4,
+                    child: Container(
+                        padding: EdgeInsets.only(bottom: 3),
+                        child: Image.asset(imagem))),
+                Expanded(
+                    flex: 1,
+                    child: Text(
+                      nome,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   _getTab(index, child) {
