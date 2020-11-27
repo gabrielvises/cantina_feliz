@@ -1,15 +1,15 @@
-import 'package:Source/ui/tela_pessoa/tela_pessoa_page.dart';
+import 'package:Source/ui/tela_produto/tela_produto_page.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 
-class TelaPessoaModule extends ModuleWidget {
-  TelaPessoaModule(Function abrirNovaTela) {
+class TelaProdutoModule extends ModuleWidget {
+  TelaProdutoModule(Function abrirNovaTela) {
     this.abrirNovaTela = abrirNovaTela;
   }
   Function abrirNovaTela;
   @override
   List<Bloc> get blocs => [
-        // Bloc((i) => TelaPessoaBloc()),
+        // Bloc((i) => TelaProdutoBloc()),
       ];
 
   @override
@@ -19,6 +19,7 @@ class TelaPessoaModule extends ModuleWidget {
       ];
 
   @override
-  Widget get view => TelaPessoaPage(abrirNovaTela);
-  static Inject get to => Inject<TelaPessoaModule>.of();
+  Widget get view => TelaProdutoPage(abrirNovaTela);
+
+  static Inject get to => Inject<TelaProdutoModule>.of();
 }

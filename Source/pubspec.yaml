@@ -29,6 +29,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/icons/menu.png
     - assets/imagens/No-foto.png
     - assets/animacoes/Splashscreen.flr
     - assets/imagens/background.png

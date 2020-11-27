@@ -1,4 +1,5 @@
 import 'package:Source/ui/tela_pessoa/tela_pessoa_module.dart';
+import 'package:Source/ui/tela_produto/tela_produto_module.dart';
 import 'package:Source/widgets/drawer-cantina.dart';
 import 'package:Source/widgets/screenUtil.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class Navigate extends StatefulWidget {
 }
 
 class _NavigateState extends State<Navigate> {
-  int currentPage = 0;
+  int currentPage = 1;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   Color corFundo = Color(0xFFA41D24); //0xFFEFEFEF
   Color corPagina = Color.fromRGBO(241, 245, 248, 1);
@@ -50,14 +51,20 @@ class _NavigateState extends State<Navigate> {
 
   _obterPagina(int pagina) {
     switch (pagina) {
-      case 0:
+      case 1:
         // etapaPessoa()
-        return TelaPessoaModule();
-      // case 2:
-      //   return HistoricoViagemModule();
+        return TelaPessoaModule(mudarTela);
+      case 2:
+        return TelaProdutoModule(mudarTela);
       // default:
       //   return InicioModule();
     }
+  }
+
+  mudarTela(novaTela) {
+    setState(() {
+      currentPage = novaTela;
+    });
   }
 
   Widget obterAppBar() {
@@ -70,7 +77,12 @@ class _NavigateState extends State<Navigate> {
               bottom: 10,
             ),
             child: Stack(children: <Widget>[
-              // botaoMenu(),
+              Image.asset(
+                "assets/icons/menu.png",
+                height: 30,
+                color: Colors.white,
+                width: 30,
+              ),
               Row(
                 children: [
                   titulo(),
@@ -97,39 +109,81 @@ class _NavigateState extends State<Navigate> {
 
   obterProgresso() {
     return Container(
-      padding: EdgeInsets.only(bottom: 10, left: 15, right: 15),
+      // padding: EdgeInsets.only(bottom: 10, left: 9, right: 9),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {
-              currentPage = 1;
-            },
-            child: Text("Identifique-se",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                )),
+          Container(
+            padding: EdgeInsets.only(bottom: 10, left: 9),
+            // color: Color.fromRGBO(241, 245, 248, 1),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    currentPage = 1;
+                  },
+                  child: Text("Identifique-se",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
+                Icon(
+                  Icons.check,
+                  color: Color(0xFF90EE90),
+                  size: 26,
+                ),
+              ],
+            ),
           ),
-          GestureDetector(
-            onTap: () {
-              currentPage = 2;
-            },
-            child: Text("Produto",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                )),
+          Container(
+            padding: EdgeInsets.only(
+              bottom: 10,
+            ),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    currentPage = 2;
+                  },
+                  child: Text("Produto",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
+                Icon(
+                  Icons.check,
+                  color: Color(0xFF90EE90),
+                  size: 26,
+                ),
+              ],
+            ),
           ),
-          GestureDetector(
-            onTap: () {
-              currentPage = 3;
-            },
-            child: Text("Finalizar",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                )),
+          Container(
+            padding: EdgeInsets.only(bottom: 10, right: 9),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    currentPage = 1;
+                  },
+                  child: Text("Finalizar",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
+                Icon(
+                  Icons.check,
+                  color: Color(0xFF90EE90),
+                  size: 26,
+                ),
+              ],
+            ),
           ),
         ],
       ),

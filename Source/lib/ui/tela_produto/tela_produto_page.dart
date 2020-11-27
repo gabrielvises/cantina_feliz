@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:Source/widgets/barra_pesquisa.dart';
 import 'package:flutter/material.dart';
 
-class TelaPessoaPage extends StatefulWidget {
-  TelaPessoaPage(abrirNovaTela) {
+class TelaProdutoPage extends StatefulWidget {
+  TelaProdutoPage(abrirNovaTela) {
     this.abrirNovaTela = abrirNovaTela;
   }
   Function abrirNovaTela;
   @override
-  _TelaPessoaPageState createState() => _TelaPessoaPageState();
+  _TelaProdutoPageState createState() => _TelaProdutoPageState();
 }
 
-class _TelaPessoaPageState extends State<TelaPessoaPage> {
+class _TelaProdutoPageState extends State<TelaProdutoPage> {
   Color corFundo = Color(0xFFA41D24); //0xFFEFEFEF
   Color corPagina = Color.fromRGBO(241, 245, 248, 1);
   @override
@@ -25,13 +25,13 @@ class _TelaPessoaPageState extends State<TelaPessoaPage> {
                 backgroundColor: Color(0xFF28A745),
                 foregroundColor: Colors.white,
                 onPressed: () {
-                  widget.abrirNovaTela(2);
+                  widget.abrirNovaTela(1);
                 },
                 label: Center(
                   child: Row(
                     children: [
                       Text(
-                        'Escolher produto(s)',
+                        'Finalizar',
                         style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(width: 10),
@@ -56,7 +56,7 @@ class _TelaPessoaPageState extends State<TelaPessoaPage> {
                       topRight: const Radius.circular(10.0))),
               child: Column(
                 children: <Widget>[
-                  BarraPesquisa(placeholder: "Qual é o seu nome?"),
+                  BarraPesquisa(placeholder: "Qual é o seu produto?"),
                   infoSelecionado(),
                   Expanded(
                     child: Container(

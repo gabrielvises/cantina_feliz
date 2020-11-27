@@ -119,7 +119,7 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
             obterAppBar(),
             obterProgresso(),
             Expanded(
-              child: etapaPessoa(),
+              child: null,
             ),
           ],
         ));
@@ -200,7 +200,6 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
                 physics: NeverScrollableScrollPhysics(),
                 controller: _tabController,
                 children: [
-                  etapaPessoa(),
                   Icon(Icons.directions_transit),
                   Icon(Icons.directions_bike),
                 ],
@@ -208,176 +207,6 @@ class _TabDemoState extends State<TabDemo> with SingleTickerProviderStateMixin {
             ),
           ],
         ));
-  }
-
-  etapaPessoa() {
-    return Container(
-      child: Container(
-        padding: EdgeInsets.only(top: 0),
-        color: Colors.transparent,
-        child: Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-                color: corPagina, //Color.fromRGBO(241, 245, 248, 1),
-                borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(10.0),
-                    topRight: const Radius.circular(10.0))),
-            child: Column(
-              children: <Widget>[
-                barraPesquisa(),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 0, left: 10, right: 10),
-                    width: double.infinity,
-                    child: GridView.count(
-                      padding: EdgeInsets.only(
-                        top: 15,
-                      ),
-                      // Create a grid with 2 columns. If you change the scrollDirection to
-                      // horizontal, this produces 2 rows.
-                      crossAxisCount: 3,
-                      // Generate 100 widgets that display their index in the List.
-
-                      children: [
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa("assets/imagens/No-foto.png", "Lucas"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Willian"),
-                        itemListaPessoa("assets/imagens/No-foto.png",
-                            "Marco aurelio lacerda"),
-                        itemListaPessoa("assets/imagens/No-foto.png", "Ana"),
-                        itemListaPessoa("assets/imagens/No-foto.png", "Robson"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Jurandir"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Garibalda"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Jeferson"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Maradona"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                        itemListaPessoa(
-                            "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            )),
-      ),
-    );
-  }
-
-  barraPesquisa() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-      child: Material(
-        elevation: 2.0,
-        borderRadius: BorderRadius.circular(10.0),
-        child: Container(
-          height: 50.0,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-          child: TextField(
-            textInputAction: TextInputAction.search,
-            decoration: InputDecoration(
-                hintText: "Qual é o seu nome?",
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 15.0, top: 15.0),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {},
-                  iconSize: 30.0,
-                )),
-            onChanged: (val) {
-              setState(() {
-                // searchAddr = val;
-              });
-            },
-            onSubmitted: (term) {
-              // searchAndNavigate();
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  String pessoaSelecionada = "";
-  itemListaPessoa(
-    String imagem,
-    String nome,
-  ) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-          border: pessoaSelecionada == nome
-              ? Border.all(
-                  color: corFundo,
-                  width: 2.5,
-                )
-              : Border.all(
-                  color: corPagina,
-                  width: 2.5,
-                ),
-          borderRadius: BorderRadius.circular(10)),
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            if (pessoaSelecionada == nome) {
-              pessoaSelecionada = "";
-            } else {
-              pessoaSelecionada = nome;
-            }
-          });
-        },
-        child: Material(
-          elevation: 1,
-          borderRadius: BorderRadius.circular(10),
-          child: Container(
-            padding: EdgeInsets.only(
-              top: 5,
-              left: 5,
-              right: 5,
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                    flex: 4,
-                    child: Container(
-                        padding: EdgeInsets.only(bottom: 3),
-                        child: Image.asset(imagem))),
-                Expanded(
-                    flex: 1,
-                    child: Text(
-                      nome,
-                      overflow: TextOverflow.ellipsis,
-                    )),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   _getTab(index, child) {
