@@ -19,7 +19,7 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: corFundo,
-      floatingActionButton: produtosSelecionados != ''
+      floatingActionButton: produtosSelecionados.isNotEmpty
           ? ShowUp(
               child: FloatingActionButton.extended(
                 backgroundColor: Color(0xFF28A745),
@@ -136,7 +136,7 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
-          border: produtosSelecionados.contem(index)
+          border: produtosSelecionados.contains(index)
               ? Border.all(
                   color: corFundo,
                   width: 2.5,
@@ -149,10 +149,10 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            if (produtosSelecionados == nome) {
-              produtosSelecionados = "";
+            if (produtosSelecionados.contains(index)) {
+              produtosSelecionados.remove(index);
             } else {
-              produtosSelecionados = nome;
+              produtosSelecionados.add(index);
             }
           });
         },
@@ -187,14 +187,14 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
   }
 
   infoSelecionado() {
-    return produtosSelecionados != ''
+    return produtosSelecionados.isNotEmpty
         ? Container(
             padding: EdgeInsets.only(top: 5, left: 15),
             height: 30,
             child: Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                produtosSelecionados + " selecionado(a)",
+                produtosSelecionados.length.toString() + "itens selecionados",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: corFundo,
