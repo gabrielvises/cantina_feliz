@@ -19,7 +19,7 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: corFundo,
-      floatingActionButton: pessoaSelecionada != ''
+      floatingActionButton: produtosSelecionados != ''
           ? ShowUp(
               child: FloatingActionButton.extended(
                 backgroundColor: Color(0xFF28A745),
@@ -32,7 +32,7 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
                     children: [
                       Text(
                         'Finalizar',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 21),
                       ),
                       SizedBox(width: 10),
                       Icon(Icons.arrow_forward),
@@ -73,44 +73,45 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
 
                         children: [
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                              0, "assets/imagens/No-foto.png", "Gabriel Vilar"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Lucas"),
+                              1, "assets/imagens/No-foto.png", "Lucas"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Willian"),
-                          itemListaPessoa("assets/imagens/No-foto.png",
+                              2, "assets/imagens/No-foto.png", "Willian"),
+                          itemListaPessoa(3, "assets/imagens/No-foto.png",
                               "Marco aurelio lacerda"),
-                          itemListaPessoa("assets/imagens/No-foto.png", "Ana"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Robson"),
+                              4, "assets/imagens/No-foto.png", "Ana"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Jurandir"),
+                              5, "assets/imagens/No-foto.png", "Robson"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Garibalda"),
+                              6, "assets/imagens/No-foto.png", "Jurandir"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Jeferson"),
+                              7, "assets/imagens/No-foto.png", "Garibalda"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Maradona"),
+                              8, "assets/imagens/No-foto.png", "Jeferson"),
                           itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
-                          itemListaPessoa(
-                              "assets/imagens/No-foto.png", "Gabriel Vilar"),
+                              9, "assets/imagens/No-foto.png", "Maradona"),
+                          itemListaPessoa(10, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(11, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(12, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(13, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(14, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(15, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(16, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(17, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(18, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
+                          itemListaPessoa(19, "assets/imagens/No-foto.png",
+                              "Gabriel Vilar"),
                         ],
                       ),
                     ),
@@ -122,15 +123,20 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
     );
   }
 
-  String pessoaSelecionada = "";
+  bool contem(int indice) {
+    return produtosSelecionados.contains(indice);
+  }
+
+  List<int> produtosSelecionados = List<int>();
   itemListaPessoa(
+    int index,
     String imagem,
     String nome,
   ) {
     return Container(
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
-          border: pessoaSelecionada == nome
+          border: produtosSelecionados.contem(index)
               ? Border.all(
                   color: corFundo,
                   width: 2.5,
@@ -143,10 +149,10 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            if (pessoaSelecionada == nome) {
-              pessoaSelecionada = "";
+            if (produtosSelecionados == nome) {
+              produtosSelecionados = "";
             } else {
-              pessoaSelecionada = nome;
+              produtosSelecionados = nome;
             }
           });
         },
@@ -181,14 +187,14 @@ class _TelaProdutoPageState extends State<TelaProdutoPage> {
   }
 
   infoSelecionado() {
-    return pessoaSelecionada != ''
+    return produtosSelecionados != ''
         ? Container(
             padding: EdgeInsets.only(top: 5, left: 15),
             height: 30,
             child: Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                pessoaSelecionada + " selecionado(a)",
+                produtosSelecionados + " selecionado(a)",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: corFundo,

@@ -77,11 +77,22 @@ class _NavigateState extends State<Navigate> {
               bottom: 10,
             ),
             child: Stack(children: <Widget>[
-              Image.asset(
-                "assets/icons/menu.png",
-                height: 30,
-                color: Colors.white,
-                width: 30,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 15,
+                  top: 3,
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    _drawerKey.currentState.openDrawer();
+                  },
+                  child: Image.asset(
+                    "assets/icons/menu.png",
+                    height: 22,
+                    color: Colors.white,
+                    width: 22,
+                  ),
+                ),
               ),
               Row(
                 children: [

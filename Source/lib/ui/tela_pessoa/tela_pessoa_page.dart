@@ -32,7 +32,7 @@ class _TelaPessoaPageState extends State<TelaPessoaPage> {
                     children: [
                       Text(
                         'Escolher produto(s)',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 21),
                       ),
                       SizedBox(width: 10),
                       Icon(Icons.arrow_forward),
